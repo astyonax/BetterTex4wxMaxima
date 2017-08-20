@@ -26,12 +26,14 @@
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
   media="none"
   onload="if(media!='all')media='all'" />
+<link rel="stylesheet"
+  media="none"
+  onload="if(media!='all')media='all'"
+  rel="stylesheet"
+  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" />
 
-<script src = "files/jquery.min.js" ></script>
-<script src = "files/bootstrap.min.js"></script>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/tex.min.js"></script>
+
+
 
 <style>
   body{color:#2D2E33;}
@@ -48,77 +50,6 @@
 </head>
 <body>
 
-<script>
-
-  cleanTex = function (TeX){
-    // cleans the tex. transformations order is not commutative
-    var remove_list = ['\\\\ensuremath','\\\\mathit'];
-    for (i=0;i<remove_list.length;i++){
-      TeX = TeX.replace(new RegExp('{{0,1}'+remove_list[i]+'{([a-zA-Z0-9]+?)}{1,2}','gm'),'$1');
-    }
-    //
-    // // Escaping is a mess but I would like to get this working asap
-    // var regular_expressions = [
-    //   // interecepts ^{a}-> ^a with a=one caracter
-    //   ["\\^{([a-zA-Z0-9])}","^$1"],
-    //   // intercepts {\a_command^a_char} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
-    //   ["([^}c]){(\\*[^{]*?\\\\^[a-zA-Z0-9])}","$1 $2"],
-    //   // intercepts {\left(..\right)} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
-    //   // ["[^}c]{(\\left\\(.+?\\right\\))\\s*}","$1"],
-    //   // intercepts {optional_command or words} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
-    //   // ["[^}c]{(\\\\*\\s*\\w+?\\s*)}","$1 "],
-    //   // get rid of \,
-    //   // ["\\,\s*","$1"]
-    // ]
-    // for (i=0;i<regular_expressions.length;i++){
-    //   re = regular_expressions[i][0];
-    //   sb = regular_expressions[i][1];
-    //   TeX = TeX.replace(new RegExp(re,'gm'),sb);
-    // }
-
-    // interecepts ^{a}-> ^a with a=one caracter
-    TeX = TeX.replace(/\^{([a-zA-Z0-9])}/gm,"^$1");
-    // intercepts {\a_command^a_char} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
-    TeX = TeX.replace(/([^}c]){(\\*[^{]*?\^[a-zA-Z0-9])}/gm,"$1 $2");
-    // intercepts {\left(..\right)} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
-    TeX = TeX.replace(/[^}c]{(\\left\(.+?\\right\))\s*}/gm,"$1");
-    // intercepts {optional_command or words} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
-    TeX = TeX.replace(/[^}c]{(\\\\*\s*\w+?\s*)}/gm,"$1 ");
-    return TeX;
-  }
-  window.BetterIt = function (TeX) {
-    var math = MathJax.Hub.getAllJax(raw_eq)[0];
-    MathJax.Hub.Queue(["Text",math,"{"+TeX+"}"]);
-
-    TeX = cleanTex(TeX);
-
-    MathSandbox.value=TeX;
-    opt_tex.innerHTML=TeX;
-    hljs.highlightBlock(opt_tex);
-    var math = MathJax.Hub.getAllJax(opt_eq)[0];
-    MathJax.Hub.Queue(["Text",math,"{"+TeX+"}"]);
-  }
-
-  window.doregex = function (TeX,regex,sub) {
-    var math = MathJax.Hub.getAllJax(regex_eq)[0];
-    TeX = TeX.replace(new RegExp(regex,'gm'),sub);
-    regex_eq.innerHTML=TeX;
-    hljs.highlightBlock(regex_eq);
-    var math = MathJax.Hub.getAllJax(regex_math)[0];
-    MathJax.Hub.Queue(["Text",math,"\\displaystyle{"+TeX+"}"]);
-  }
-    // define a handler
-  function go(e) {
-    // this would test for whichever key is 40 and the ctrl key at the same time
-    if (e.ctrlKey && e.keyCode == 13) {
-        // call your function to do the thing
-        BetterIt(MathInput.value);
-    }
-  }
-  // register the handler
-  document.addEventListener('keyup', go, false);
-
-</script>
   <nav class="navbar navbar-default ">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#thenavbar">
@@ -278,6 +209,85 @@
   </div>
   </div>
 </div>
+
+<!-- END of HTML content -->
+<!-- BGN of JS   content -->
+
+<script src = "files/jquery.min.js" async ></script>
+<script src = "files/bootstrap.min.js" async ></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" async ></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/tex.min.js" async ></script>
+
+<script>
+  cleanTex = function (TeX){
+    // cleans the tex. transformations order is not commutative
+    var remove_list = ['\\\\ensuremath','\\\\mathit'];
+    for (i=0;i<remove_list.length;i++){
+      TeX = TeX.replace(new RegExp('{{0,1}'+remove_list[i]+'{([a-zA-Z0-9]+?)}{1,2}','gm'),'$1');
+    }
+    //
+    // // Escaping is a mess but I would like to get this working asap
+    // var regular_expressions = [
+    //   // interecepts ^{a}-> ^a with a=one caracter
+    //   ["\\^{([a-zA-Z0-9])}","^$1"],
+    //   // intercepts {\a_command^a_char} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
+    //   ["([^}c]){(\\*[^{]*?\\\\^[a-zA-Z0-9])}","$1 $2"],
+    //   // intercepts {\left(..\right)} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
+    //   // ["[^}c]{(\\left\\(.+?\\right\\))\\s*}","$1"],
+    //   // intercepts {optional_command or words} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
+    //   // ["[^}c]{(\\\\*\\s*\\w+?\\s*)}","$1 "],
+    //   // get rid of \,
+    //   // ["\\,\s*","$1"]
+    // ]
+    // for (i=0;i<regular_expressions.length;i++){
+    //   re = regular_expressions[i][0];
+    //   sb = regular_expressions[i][1];
+    //   TeX = TeX.replace(new RegExp(re,'gm'),sb);
+    // }
+
+    // interecepts ^{a}-> ^a with a=one caracter
+    TeX = TeX.replace(/\^{([a-zA-Z0-9])}/gm,"^$1");
+    // intercepts {\a_command^a_char} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
+    TeX = TeX.replace(/([^}c]){(\\*[^{]*?\^[a-zA-Z0-9])}/gm,"$1 $2");
+    // intercepts {\left(..\right)} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
+    TeX = TeX.replace(/[^}c]{(\\left\(.+?\\right\))\s*}/gm,"$1");
+    // intercepts {optional_command or words} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
+    TeX = TeX.replace(/[^}c]{(\\\\*\s*\w+?\s*)}/gm,"$1 ");
+    return TeX;
+  }
+  window.BetterIt = function (TeX) {
+    var math = MathJax.Hub.getAllJax(raw_eq)[0];
+    MathJax.Hub.Queue(["Text",math,"{"+TeX+"}"]);
+
+    TeX = cleanTex(TeX);
+
+    MathSandbox.value=TeX;
+    opt_tex.innerHTML=TeX;
+    hljs.highlightBlock(opt_tex);
+    var math = MathJax.Hub.getAllJax(opt_eq)[0];
+    MathJax.Hub.Queue(["Text",math,"{"+TeX+"}"]);
+  }
+
+  window.doregex = function (TeX,regex,sub) {
+    var math = MathJax.Hub.getAllJax(regex_eq)[0];
+    TeX = TeX.replace(new RegExp(regex,'gm'),sub);
+    regex_eq.innerHTML=TeX;
+    hljs.highlightBlock(regex_eq);
+    var math = MathJax.Hub.getAllJax(regex_math)[0];
+    MathJax.Hub.Queue(["Text",math,"\\displaystyle{"+TeX+"}"]);
+  }
+    // define a handler
+  function go(e) {
+    // this would test for whichever key is 40 and the ctrl key at the same time
+    if (e.ctrlKey && e.keyCode == 13) {
+        // call your function to do the thing
+        BetterIt(MathInput.value);
+    }
+  }
+  // register the handler
+  document.addEventListener('keyup', go, false);
+</script>
+
 <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     MathJax.Hub.Queue(function(){BetterIt(MathInput.value);doregex(MathSandbox.value,RegExSandbox.value,SubsSandbox.value)});
