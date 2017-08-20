@@ -32,9 +32,6 @@
   rel="stylesheet"
   href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" />
 
-
-
-
 <style>
   body{color:#2D2E33;}
   div.raw{background-color:#DB5461;}
@@ -46,13 +43,11 @@
   .footer>.row{background-color:#eeeeee;padding:1em 1em 0 0;border-top: 1px solid #dddddd;}
   #About h4{padding-top:1em;}
 </style>
-
 </head>
 <body>
-
   <nav class="navbar navbar-default ">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#thenavbar">
+        <button aria-label="Toggle NavBar" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#thenavbar">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -60,7 +55,6 @@
         <a class="navbar-brand" href="#">Better\(\TeX\)4WxMaxima</a>
       </div>
       <ul class="nav navbar-nav collapse navbar-collapse" id="thenavbar">
-        <!-- <li class="active"><a href="#">Home</a></li> -->
         <li><a href="#Simplify">Simplify</a></li>
         <li><a href="#Sandbox">Sandbox</a></li>
         <li><a href="#About">About</a></li>
@@ -70,9 +64,9 @@
   <div class='container' id='Simplify' onclick="BetterIt(MathInput.value)">
     <div class='row raw'>
       <div class='col-md-6'>
-        <h3> Original TeX as from Maxima </h3>
+        <h3 id='lblMathInput'> Original TeX as from Maxima </h3>
         <div class=form-group>
-        <textarea class="form-control" id="MathInput" width=100% rows="8" >
+        <textarea class="form-control" id="MathInput" aria-labelledby="lblMathInput" width=100% rows="8" >
 \begin{align}
   \frac{\left( -8 \mathit{tU} U+4 b\, \mathit{ii}\, {{\mathit{tU}}^{2}}-2 \mathit{TnnT}\, \mathit{ii}\right)  \lambda}{2}&\\
   {\left( .. \right)}&\\
@@ -92,13 +86,16 @@
     <div class='col-md-6'>
       <h3> Simplified TeX </h3>
       <div class=form-group>
-      <div class="align-middle"><pre><code id='opt_tex' class='tex'></code></pre></div>
-    </div>
+        <div class="align-middle"><pre><code id='opt_tex' class='tex'></code></pre></div>
+      </div>
     </div>
     <div class='col-md-6'>
       <h3> Simplified Equation </h3>
       <div id="opt_eq" >$${}$$</div>
     </div>
+
+    Not what you expected? Have a look in the <a href="#QA">Q&amp;A</a> section, and at the
+    <a href="https://github.com/astyonax/BetterTex4wxMaxima/issues">Issues</a> page.
   </div>
 </div>
 
@@ -138,13 +135,12 @@
       <div class='col-md-2'></div>
       <div class='col-md-8'>
         <h2>About</h2>
-        The \(\TeX\) output of wxMaxima
-        <a href="http://andrejv.github.io/wxmaxima/">
+        The \(\TeX\) output of <a href="http://andrejv.github.io/wxmaxima/">wxMaxima
           <i class="fa fa-external-link" aria-hidden="true"></i>
         </a> is not so readable.
         This page implements some regex to bring it down to a more palatable format;
-        one other option is to call maxima's <code>tex()</code>
-        <a href="http://maxima.sourceforge.net/docs/manual/maxima_singlepage.html#Item_003a-tex">
+        one other option is to call maxima's
+        <a href="http://maxima.sourceforge.net/docs/manual/maxima_singlepage.html#Item_003a-tex"><code>tex()</code>
           <i class="fa fa-external-link" aria-hidden="true"></i>
         </a>
          function on the expression to convert to TeX.
@@ -154,9 +150,9 @@
         In the section <a href="#Sandbox">Sandbox</a> one can tweak a custom regex to
         obtain the desidered result.
 
-        Issues and suggested regex shall be reported in the <a href='#'>Issues page</a> of the project home in github.com
+        Issues and suggested regex shall be reported in the <a href='https://github.com/astyonax/BetterTex4wxMaxima/issues'>Issues page</a> of the project home in github.com
 
-        <h3>Q&amp;A</h3>
+        <h3 id="QA">Q&amp;A</h3>
         <h4> How does it work?</h4>
         I transform the original \(\TeX\) code with a set of regex(es).
         As first step, I remove useless keywords, such as <i>\mathit</i>, togheter with
@@ -187,16 +183,18 @@
         <h4> Can I help?</h4>
         Yes. By finding wxMaxima's \(\TeX\) code for which the transformation rules do not work.
         <h4> The new \(\TeX\) does not work</h4>
-        If the transformation rule skews up the original \(\TeX\), please open an Issue reporting
+        If the transformation rule skews up the original \(\TeX\), please open an
+        <a href="https://github.com/astyonax/BetterTex4wxMaxima/issues">
+        Issue</a> reporting
         both the original and the optimized codes. The <strong>best</strong>
         would be if you can prepare a minimal example which shows the same behaviour.
         <h4> Why is it not being cleaned enough?</h4>
         The reason is simple. I did not see your particular edge case, so there is
         no transformation rule able to intercept your case.
-        You can open an Issue, reporting your original and optimized eq, alongside with
+        You can open an <a href="https://github.com/astyonax/BetterTex4wxMaxima/issues">Issue</a>, reporting your original and optimized eq, alongside with
         the wanted version. The <strong>best</strong> is that you use the sandbox
         to craft a regex that does the job on the already optimized code.
-        Then open an Issue to propose such regex.
+        Then open an <a href="https://github.com/astyonax/BetterTex4wxMaxima/issues">Issue</a> to propose such regex.
       </div>
       <div class='col-md-2'></div>
     </div>
@@ -212,7 +210,7 @@
 
 <!-- END of HTML content -->
 <!-- BGN of JS   content -->
-
+<script src = "js/passivate.js" async ></script>
 <script src = "files/jquery.min.js" async ></script>
 <script src = "files/bootstrap.min.js" async ></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" async ></script>
