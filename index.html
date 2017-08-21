@@ -1,39 +1,4 @@
-<!DOCTYPE html>
-<html lang='en'>
-<head>
-<title>Better Tex</title>
-<!-- Copyright (c) 2010-2015 The MathJax Consortium -->
-<!-- Modified by Guglielmo Saggiorato -->
-<!-- <link rel="manifest" href="manifest.json" /> -->
-<meta name="description" content="Sandbox to clean wxMaxima 'Copy to Latex' output">
-<meta name="keywords" content="Latex,tex,regex,javascript,wxmaxima,maxima">
-<meta name="author" content="Guglielmo Saggiorato">
-
-<link rel="icon" href="files/black_square_36x36.png" type="image/png" />
-<meta http-equiv="content-type" content="text/html; charset=us-ascii" />
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta http-equiv="Cache-Control" content="max-age=3600" />
-
-<link
-  media="none"
-  onload="if(media!='all')media='all'"
-  rel="stylesheet"
-  href="files/bootstrap.min.css"/>
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-  media="none"
-  onload="if(media!='all')media='all'" />
-<link rel="stylesheet"
-  media="none"
-  onload="if(media!='all')media='all'"
-  rel="stylesheet"
-  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" />
-
-<style>
-  body{color:#2D2E33;}
+<!DOCTYPE html><html lang=en><head><title>Better Tex</title><meta content="Sandbox to clean wxMaxima 'Copy to Latex' output" name=description><meta content=Latex,tex,regex,javascript,wxmaxima,maxima name=keywords><meta content="Guglielmo Saggiorato" name=author><link rel=icon href=files/black_square_36x36.png type=image/png><meta content="text/html; charset=us-ascii" http-equiv=content-type><meta charset=utf-8><meta content="IE=edge" http-equiv=X-UA-Compatible><meta content="width=device-width,initial-scale=1" name=viewport><meta content="max-age=3600" http-equiv=Cache-Control><link rel=stylesheet href=files/bootstrap.min.css media=none onload='"all"!=media&&(media="all")'><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css media=none onload='"all"!=media&&(media="all")'><link rel=stylesheet rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css media=none onload='"all"!=media&&(media="all")'><style>body{color:#2D2E33;}
   div.raw{background-color:#DB5461;}
   div.optimized{background-color:#FFD166;}
   div.container{max-width:1200px;}
@@ -41,136 +6,22 @@
   div.eq{max-width:100%;}
   #Sandbox>.row{background-color:#06D6A0;}
   .footer>.row{background-color:#eeeeee;padding:1em 1em 0 0;border-top: 1px solid #dddddd;}
-  #About h4{padding-top:1em;}
-</style>
-</head>
-<body>
-  <nav class="navbar navbar-default ">
-      <div class="navbar-header">
-        <button aria-label="Toggle NavBar" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#thenavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Better\(\TeX\)4WxMaxima</a>
-      </div>
-      <ul class="nav navbar-nav collapse navbar-collapse" id="thenavbar">
-        <li><a href="#Simplify">Simplify</a></li>
-        <li><a href="#Sandbox">Sandbox</a></li>
-        <li><a href="#About">About</a></li>
-      </ul>
-  </nav>
-
-  <div class='container' id='Simplify' onclick="BetterIt(MathInput.value)">
-    <div class='row raw'>
-      <div class='col-md-6'>
-        <h3 id='lblMathInput'> Original TeX as from Maxima </h3>
-        <div class=form-group>
-        <textarea class="form-control" id="MathInput" aria-labelledby="lblMathInput" width=100% rows="8" >
+  #About h4{padding-top:1em;}</style></head><body><nav class="navbar navbar-default"><div class=navbar-header><button class=navbar-toggle aria-label="Toggle NavBar" data-target=#thenavbar data-toggle=collapse type=button><span class=icon-bar></span> <span class=icon-bar></span> <span class=icon-bar></span></button> <a href=# class=navbar-brand>Better\(\TeX\)4WxMaxima</a></div><ul class="collapse nav navbar-collapse navbar-nav" id=thenavbar><li><a href=#Simplify>Simplify</a></li><li><a href=#Sandbox>Sandbox</a></li><li><a href=#About>About</a></li></ul></nav><div class=container id=Simplify onclick=BetterIt(MathInput.value)><div class="row raw"><div class=col-md-6><h3 id=lblMathInput>Original TeX as from Maxima</h3><div class=form-group><textarea class=form-control id=MathInput rows=8 width=100% aria-labelledby=lblMathInput>
 \begin{align}
   \frac{\left( -8 \mathit{tU} U+4 b\, \mathit{ii}\, {{\mathit{tU}}^{2}}-2 \mathit{TnnT}\, \mathit{ii}\right)  \lambda}{2}&\\
   {\left( .. \right)}&\\
   {m^2}&\\
   \frac{\left( .. \right)}{m^2}&
 \end{align}
-        </textarea>
-        <button class='btn btn-primary' onclick="BetterIt(MathInput.value)">Show (CTRL+ENTER)</button>
-        </div>
-    </div>
-    <div class='col-md-6'>
-      <h3> Original Equation </h3>
-      <div id="raw_eq" class="align-middle eq">$${}$$</div>
-    </div>
-  </div>
-  <div class='row optimized'>
-    <div class='col-md-6'>
-      <h3> Simplified TeX </h3>
-      <div class=form-group>
-        <div class="align-middle"><pre><code id='opt_tex' class='tex'></code></pre></div>
-      </div>
-    </div>
-    <div class='col-md-6'>
-      <h3> Simplified Equation </h3>
-      <div id="opt_eq" >$${}$$</div>
-    </div>
-
-    Not what you expected? Have a look in the <a href="#QA">Q&amp;A</a> section, and at the
-    <a href="https://github.com/astyonax/BetterTex4wxMaxima/issues">Issues</a> page.
-  </div>
-</div>
-
-
-  <div class='container' id='Sandbox'>
-    <div class='row '>
-      <div class='col-md-6'>
-        <h2>Sandbox</h2>
-          <label for='RegExSandbox'>RegEx:</label>
-          <input type='text' class="form-control" id="RegExSandbox" width=100% rows="1" value="\\,\s*?(\w)"/>
-          <label for='SubsSandbox'>Substitute with:</label>
-          <input type='text' class="form-control" id="SubsSandbox" width=100% rows="1" value="$1"/>
-      </div>
-    </div>
-    <div class='row '>
-      <div class='col-md-6'>
-        <label for='MathSandbox'>\(\TeX\):</label>
-        <textarea class="form-control" id="MathSandbox" width=100% rows="8" >\Delta_{\mu^\nu}
-        </textarea>
-        <button class='btn btn-primary' onclick="doregex(MathSandbox.value,RegExSandbox.value,SubsSandbox.value)">Go</button>
-      </div>
-      <div class='col-md-6'>
-        <label for='regex_eq'>Transformed</label>
-        <div class="align-middle"><pre><code id='regex_eq' class='tex'></code></pre></div>
-        <!-- <textarea class="form-control vcenter" id="regex_eq" width=100% rows="10" ></textarea> -->
-        </div>
-      </div>
-    <div class='row '>
-      <div class='col-md-12'>
-        <div id="regex_math" class="align-middle">$${}$$</div>
-      </div>
-    </div>
-  </div>
-
-  <div class='container' id='About'>
-    <div class='row '>
-      <div class='col-md-2'></div>
-      <div class='col-md-8'>
-        <h2>About</h2>
-        The \(\TeX\) output of <a href="http://andrejv.github.io/wxmaxima/">wxMaxima
-          <i class="fa fa-external-link" aria-hidden="true"></i>
-        </a> is not so readable.
-        This page implements some regex to bring it down to a more palatable format;
-        one other option is to call maxima's
-        <a href="http://maxima.sourceforge.net/docs/manual/maxima_singlepage.html#Item_003a-tex"><code>tex()</code>
-          <i class="fa fa-external-link" aria-hidden="true"></i>
-        </a>
-         function on the expression to convert to TeX.
-        The current regex(es) do not cope with all cases, and may break the \(\TeX\) itself,
-        for this reason the optimized code is rendered alongside to the original one.
-
-        In the section <a href="#Sandbox">Sandbox</a> one can tweak a custom regex to
-        obtain the desidered result.
-
-        Issues and suggested regex shall be reported in the <a href='https://github.com/astyonax/BetterTex4wxMaxima/issues'>Issues page</a> of the project home in github.com
-
-        <h3 id="QA">Q&amp;A</h3>
-        <h4> How does it work?</h4>
-        I transform the original \(\TeX\) code with a set of regex(es).
-        As first step, I remove useless keywords, such as <i>\mathit</i>, togheter with
-        annoying useles braces. The corresponding code snippet reads
-        <pre><code class='js'>TeX = TeX.replace(new RegExp('{{0,1}'+remove_list[i]+'{([a-zA-Z0-9]+?)}{1,2}','gm'),'$1');</code></pre>
-
-        Then a set of regex(es) are applied to remove the surrounding braces in cases like
-        <code class='tex'>{\left(... \right)}</code>, or <code class='tex'>{m^2}</code>.
-        At the moment, these transformations protect cases like
-        <code class='tex'>\frac{\left( .. \right)}{m^2}</code>. The essential, and minimal code is
-        <pre><code class='js'>cleanTex = function (TeX){
+        </textarea><button class="btn btn-primary" onclick=BetterIt(MathInput.value)>Show (CTRL+ENTER)</button></div></div><div class=col-md-6><h3>Original Equation</h3><div class="align-middle eq" id=raw_eq>$${}$$</div></div></div><div class="row optimized"><div class=col-md-6><h3>Simplified TeX</h3><div class=form-group><div class=align-middle><pre><code class=tex id=opt_tex></code></pre></div></div></div><div class=col-md-6><h3>Simplified Equation</h3><div id=opt_eq>$${}$$</div></div>Not what you expected? Have a look in the <a href=#QA>Q&amp;A</a> section, and at the <a href=https://github.com/astyonax/BetterTex4wxMaxima/issues>Issues</a> page.</div></div><div class=container id=Sandbox><div class=row><div class=col-md-6><h2>Sandbox</h2><label for=RegExSandbox>RegEx:</label><input class=form-control id=RegExSandbox rows=1 type=text value=\\,\s*?(\w) width=100%><label for=SubsSandbox>Substitute with:</label><input class=form-control id=SubsSandbox rows=1 type=text value=$1 width=100%></div></div><div class=row><div class=col-md-6><label for=MathSandbox>\(\TeX\):</label><textarea class=form-control id=MathSandbox rows=8 width=100%>\Delta_{\mu^\nu}
+        </textarea><button class="btn btn-primary" onclick=doregex(MathSandbox.value,RegExSandbox.value,SubsSandbox.value)>Go</button></div><div class=col-md-6><label for=regex_eq>Transformed</label><div class=align-middle><pre><code class=tex id=regex_eq></code></pre></div></div></div><div class=row><div class=col-md-12><div class=align-middle id=regex_math>$${}$$</div></div></div></div><div class=container id=About><div class=row><div class=col-md-2></div><div class=col-md-8><h2>About</h2>The \(\TeX\) output of <a href=http://andrejv.github.io/wxmaxima/ >wxMaxima <i aria-hidden=true class="fa fa-external-link"></i> </a>is not so readable. This page implements some regex to bring it down to a more palatable format; one other option is to call maxima's <a href=http://maxima.sourceforge.net/docs/manual/maxima_singlepage.html#Item_003a-tex><code>tex()</code> <i aria-hidden=true class="fa fa-external-link"></i> </a>function on the expression to convert to TeX. The current regex(es) do not cope with all cases, and may break the \(\TeX\) itself, for this reason the optimized code is rendered alongside to the original one. In the section <a href=#Sandbox>Sandbox</a> one can tweak a custom regex to obtain the desidered result. Issues and suggested regex shall be reported in the <a href=https://github.com/astyonax/BetterTex4wxMaxima/issues>Issues page</a> of the project home in github.com<h3 id=QA>Q&amp;A</h3><h4>How does it work?</h4>I transform the original \(\TeX\) code with a set of regex(es). As first step, I remove useless keywords, such as <i>\mathit</i>, togheter with annoying useles braces. The corresponding code snippet reads<pre><code class=js>TeX = TeX.replace(new RegExp('{{0,1}'+remove_list[i]+'{([a-zA-Z0-9]+?)}{1,2}','gm'),'$1');</code></pre>Then a set of regex(es) are applied to remove the surrounding braces in cases like <code class=tex>{\left(... \right)}</code>, or <code class=tex>{m^2}</code>. At the moment, these transformations protect cases like <code class=tex>\frac{\left( .. \right)}{m^2}</code>. The essential, and minimal code is<pre><code class=js>cleanTex = function (TeX){
   // cleans the tex. transformations order is not commutative
   var remove_list = ['\\\\ensuremath','\\\\mathit'];
-  for (i=0;i<remove_list.length;i++){
+  for (i=0;i&lt;remove_list.length;i++){
       TeX = TeX.replace(new RegExp('{{0,1}'+remove_list[i]+'{([a-zA-Z0-9]+?)}{1,2}','gm'),' $1 ');
     }
-  // interecepts ^{a}-> ^a with a=one caracter
-  // interecepts ^{a}-> ^a with a=one caracter
+  // interecepts ^{a}-&gt; ^a with a=one caracter
+  // interecepts ^{a}-&gt; ^a with a=one caracter
   TeX = TeX.replace(/\^{([a-zA-Z0-9])}/gm,"^$1");
   // intercepts {\a_command^a_char} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
   TeX = TeX.replace(/([^}c]){(\\*[^{]*?\^[a-zA-Z0-9])}/gm,"$1 $2");
@@ -179,117 +30,4 @@
   // intercepts {optional_command or words} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
   TeX = TeX.replace(/[^}c]{(\\\\*\s*\w+?\s*)}/gm,"$1 ");
   return TeX;
-}</code></pre>
-        <h4> Can I help?</h4>
-        Yes. By finding wxMaxima's \(\TeX\) code for which the transformation rules do not work.
-        <h4> The new \(\TeX\) does not work</h4>
-        If the transformation rule skews up the original \(\TeX\), please open an
-        <a href="https://github.com/astyonax/BetterTex4wxMaxima/issues">
-        Issue</a> reporting
-        both the original and the optimized codes. The <strong>best</strong>
-        would be if you can prepare a minimal example which shows the same behaviour.
-        <h4> Why is it not being cleaned enough?</h4>
-        The reason is simple. I did not see your particular edge case, so there is
-        no transformation rule able to intercept your case.
-        You can open an <a href="https://github.com/astyonax/BetterTex4wxMaxima/issues">Issue</a>, reporting your original and optimized eq, alongside with
-        the wanted version. The <strong>best</strong> is that you use the sandbox
-        to craft a regex that does the job on the already optimized code.
-        Then open an <a href="https://github.com/astyonax/BetterTex4wxMaxima/issues">Issue</a> to propose such regex.
-      </div>
-      <div class='col-md-2'></div>
-    </div>
-  </div>
-
-<div class='container footer'>
-<div class='row'>
-  <div class = 'col-md-12'>
-  &#9400; 2017 - Site Built By Guglielmo Saggiorato <i class="fa fa-github" aria-hidden="true"></i>
-  </div>
-  </div>
-</div>
-
-<!-- END of HTML content -->
-<!-- BGN of JS   content -->
-<script src = "js/passivate.js" async ></script>
-<script src = "files/jquery.min.js" async ></script>
-<script src = "files/bootstrap.min.js" async ></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" async ></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/tex.min.js" async ></script>
-
-<script>
-  cleanTex = function (TeX){
-    // cleans the tex. transformations order is not commutative
-    var remove_list = ['\\\\ensuremath','\\\\mathit'];
-    for (i=0;i<remove_list.length;i++){
-      TeX = TeX.replace(new RegExp('{{0,1}'+remove_list[i]+'{([a-zA-Z0-9]+?)}{1,2}','gm'),'$1');
-    }
-    //
-    // // Escaping is a mess but I would like to get this working asap
-    // var regular_expressions = [
-    //   // interecepts ^{a}-> ^a with a=one caracter
-    //   ["\\^{([a-zA-Z0-9])}","^$1"],
-    //   // intercepts {\a_command^a_char} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
-    //   ["([^}c]){(\\*[^{]*?\\\\^[a-zA-Z0-9])}","$1 $2"],
-    //   // intercepts {\left(..\right)} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
-    //   // ["[^}c]{(\\left\\(.+?\\right\\))\\s*}","$1"],
-    //   // intercepts {optional_command or words} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
-    //   // ["[^}c]{(\\\\*\\s*\\w+?\\s*)}","$1 "],
-    //   // get rid of \,
-    //   // ["\\,\s*","$1"]
-    // ]
-    // for (i=0;i<regular_expressions.length;i++){
-    //   re = regular_expressions[i][0];
-    //   sb = regular_expressions[i][1];
-    //   TeX = TeX.replace(new RegExp(re,'gm'),sb);
-    // }
-
-    // interecepts ^{a}-> ^a with a=one caracter
-    TeX = TeX.replace(/\^{([a-zA-Z0-9])}/gm,"^$1");
-    // intercepts {\a_command^a_char} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
-    TeX = TeX.replace(/([^}c]){(\\*[^{]*?\^[a-zA-Z0-9])}/gm,"$1 $2");
-    // intercepts {\left(..\right)} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
-    TeX = TeX.replace(/[^}c]{(\\left\(.+?\\right\))\s*}/gm,"$1");
-    // intercepts {optional_command or words} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
-    TeX = TeX.replace(/[^}c]{(\\\\*\s*\w+?\s*)}/gm,"$1 ");
-    return TeX;
-  }
-  window.BetterIt = function (TeX) {
-    var math = MathJax.Hub.getAllJax(raw_eq)[0];
-    MathJax.Hub.Queue(["Text",math,"{"+TeX+"}"]);
-
-    TeX = cleanTex(TeX);
-
-    MathSandbox.value=TeX;
-    opt_tex.innerHTML=TeX;
-    hljs.highlightBlock(opt_tex);
-    var math = MathJax.Hub.getAllJax(opt_eq)[0];
-    MathJax.Hub.Queue(["Text",math,"{"+TeX+"}"]);
-  }
-
-  window.doregex = function (TeX,regex,sub) {
-    var math = MathJax.Hub.getAllJax(regex_eq)[0];
-    TeX = TeX.replace(new RegExp(regex,'gm'),sub);
-    regex_eq.innerHTML=TeX;
-    hljs.highlightBlock(regex_eq);
-    var math = MathJax.Hub.getAllJax(regex_math)[0];
-    MathJax.Hub.Queue(["Text",math,"\\displaystyle{"+TeX+"}"]);
-  }
-    // define a handler
-  function go(e) {
-    // this would test for whichever key is 40 and the ctrl key at the same time
-    if (e.ctrlKey && e.keyCode == 13) {
-        // call your function to do the thing
-        BetterIt(MathInput.value);
-    }
-  }
-  // register the handler
-  document.addEventListener('keyup', go, false);
-</script>
-
-<script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-    MathJax.Hub.Queue(function(){BetterIt(MathInput.value);doregex(MathSandbox.value,RegExSandbox.value,SubsSandbox.value)});
-    hljs.initHighlightingOnLoad();
-</script>
-</body>
-</html>
+}</code></pre><h4>Can I help?</h4>Yes. By finding wxMaxima's \(\TeX\) code for which the transformation rules do not work.<h4>The new \(\TeX\) does not work</h4>If the transformation rule skews up the original \(\TeX\), please open an <a href=https://github.com/astyonax/BetterTex4wxMaxima/issues>Issue</a> reporting both the original and the optimized codes. The <strong>best</strong> would be if you can prepare a minimal example which shows the same behaviour.<h4>Why is it not being cleaned enough?</h4>The reason is simple. I did not see your particular edge case, so there is no transformation rule able to intercept your case. You can open an <a href=https://github.com/astyonax/BetterTex4wxMaxima/issues>Issue</a>, reporting your original and optimized eq, alongside with the wanted version. The <strong>best</strong> is that you use the sandbox to craft a regex that does the job on the already optimized code. Then open an <a href=https://github.com/astyonax/BetterTex4wxMaxima/issues>Issue</a> to propose such regex.</div><div class=col-md-2></div></div></div><div class="container footer"><div class=row><div class=col-md-12>&#9400; 2017 - Site Built By Guglielmo Saggiorato <i aria-hidden=true class="fa fa-github"></i></div></div></div><script src=js/passivate.js></script><script src=js/jquery.min.js async></script><script src=js/bootstrap.min.js async></script><script src=js/highlight.pack.js async></script><script>function go(e){e.ctrlKey&&13==e.keyCode&&BetterIt(MathInput.value)}cleanTex=function(e){var t=["\\\\ensuremath","\\\\mathit"];for(i=0;i<t.length;i++)e=e.replace(new RegExp("{{0,1}"+t[i]+"{([a-zA-Z0-9]+?)}{1,2}","gm"),"$1");return e=e.replace(/\^{([a-zA-Z0-9])}/gm,"^$1"),e=e.replace(/([^}c]){(\\*[^{]*?\^[a-zA-Z0-9])}/gm,"$1 $2"),e=e.replace(/[^}c]{(\\left\(.+?\\right\))\s*}/gm,"$1"),e=e.replace(/[^}c]{(\\\\*\s*\w+?\s*)}/gm,"$1 ")},window.BetterIt=function(e){t=MathJax.Hub.getAllJax(raw_eq)[0];MathJax.Hub.Queue(["Text",t,"{"+e+"}"]),e=cleanTex(e),MathSandbox.value=e,opt_tex.innerHTML=e,hljs.highlightBlock(opt_tex);var t=MathJax.Hub.getAllJax(opt_eq)[0];MathJax.Hub.Queue(["Text",t,"{"+e+"}"])},window.doregex=function(e,t,a){l=MathJax.Hub.getAllJax(regex_eq)[0];e=e.replace(new RegExp(t,"gm"),a),regex_eq.innerHTML=e,hljs.highlightBlock(regex_eq);var l=MathJax.Hub.getAllJax(regex_math)[0];MathJax.Hub.Queue(["Text",l,"\\displaystyle{"+e+"}"])},document.addEventListener("keyup",go,!1)</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async type=text/javascript>MathJax.Hub.Queue(function(){BetterIt(MathInput.value),doregex(MathSandbox.value,RegExSandbox.value,SubsSandbox.value)}),hljs.initHighlightingOnLoad()</script></body></html>
