@@ -40,8 +40,9 @@
   /*#navbar{white-space:nowrap;}*/
   div.eq{max-width:100%;}
   #Sandbox>.row{background-color:#06D6A0;}
-  .footer>.row{background-color:#eeeeee;padding:1em 1em 0 0;border-top: 1px solid #dddddd;}
+  .footer>.row{background-color:#eeeeee;padding:1em 1em 0 0;border-top: 1px solid #dddddd;text-align:center;}
   #About h4{padding-top:1em;}
+  .bold{font-weight: bold; }
 </style>
 </head>
 <body>
@@ -200,13 +201,7 @@
     </div>
   </div>
 
-<div class='container footer'>
-<div class='row'>
-  <div class = 'col-md-12'>
-  &#9400; 2017 - Site Built By Guglielmo Saggiorato <i class="fa fa-github" aria-hidden="true"></i>
-  </div>
-  </div>
-</div>
+
 
 <!-- END of HTML content -->
 <!-- BGN of JS   content -->
@@ -288,9 +283,22 @@
 </script>
 
 <script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     MathJax.Hub.Queue(function(){BetterIt(MathInput.value);doregex(MathSandbox.value,RegExSandbox.value,SubsSandbox.value)});
     hljs.initHighlightingOnLoad();
 </script>
+<div class='container footer'>
+<div class='row'>
+  <div class = 'col-md-12'>
+    <!-- <center> -->
+  &#9400; 2017 -
+  <i class="fa fa-code bold" aria-hidden="true" aria-label="Coded"></i>
+  with <i class="fa fa-flask bold" aria-hidden="true" aria-label="love"></i> by
+  <a href="https://github.com/astyonax">Guglielmo Saggiorato
+    <i class="fa fa-github" aria-hidden="true" aria-label="hosted on github.com"></i></a>
+<!-- </center> -->
+  </div>
+  </div>
+</div>
 </body>
 </html>
