@@ -1,2 +1,2 @@
 html-minifier --remove-attribute-quotes  --remove-comments --html5 --use-short-doctype --remove-empty-attributes --collapse-whitespace --sort-attributes --sort-class-name --minify-js < index.long.html >index.html
-
+echo 'index.html minified'
