@@ -30,7 +30,7 @@
   media="none"
   onload="if(media!='all')media='all'"
   rel="stylesheet"
-  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
 
 <style>
   body{color:#2D2E33;}
@@ -109,6 +109,14 @@
           <input type='text' class="form-control" id="RegExSandbox" width=100% rows="1" value="\\,\s*?(\w)"/>
           <label for='SubsSandbox'>Substitute with:</label>
           <input type='text' class="form-control" id="SubsSandbox" width=100% rows="1" value="$1"/>
+      </div>
+      <div class='col-md-6'>
+        <label for='RegExHelp'>Regular Expressions help</label>
+        <ul id='RegExHelp'>
+          <li><a href="https://regex101.com/">Regex 101</a></li>
+          <li><a href="https://github.com/crazyguitar/pysheeet/blob/master/docs/notes/python-rexp.rst">
+          Python regular expressions cheat sheet</a></li>
+        </ul>
       </div>
     </div>
     <div class='row '>
@@ -283,7 +291,7 @@
 </script>
 
 <script type="text/javascript" async
-  src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     MathJax.Hub.Queue(function(){BetterIt(MathInput.value);doregex(MathSandbox.value,RegExSandbox.value,SubsSandbox.value)});
     hljs.initHighlightingOnLoad();
 </script>
