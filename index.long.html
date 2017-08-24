@@ -5,16 +5,21 @@
 <!-- Copyright (c) 2010-2015 The MathJax Consortium -->
 <!-- Modified by Guglielmo Saggiorato -->
 <!-- <link rel="manifest" href="manifest.json" /> -->
-<meta name="description" content="Sandbox to clean wxMaxima 'Copy to Latex' output">
-<meta name="keywords" content="Latex,tex,regex,javascript,wxmaxima,maxima">
-<meta name="author" content="Guglielmo Saggiorato">
-
+<meta name="description" content="Sandbox to clean wxMaxima 'Copy to Latex' output"/>
+<meta name="keywords" content="Latex,tex,regex,javascript,wxmaxima,maxima"/>
+<meta name="author" content="Guglielmo Saggiorato"/>
+<meta name="theme-color" content="#DB5461" />
 <link rel="icon" href="files/black_square_36x36.png" type="image/png" />
-<meta http-equiv="content-type" content="text/html; charset=us-ascii" />
+<meta http-equiv="content-type" content="text/html" />
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta http-equiv="Cache-Control" content="max-age=3600" />
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" />
+<link rel="prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" />
+<link rel="subresource" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" />
+
+
 
 <link
   media="none"
@@ -23,17 +28,26 @@
   href="files/bootstrap.min.css"/>
 <link
   rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
   media="none"
-  onload="if(media!='all')media='all'" />
+  onload="if(media!='all')media='all'"
+  href="files/font-awesome.min.css"
+  />
+  <!-- href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" -->
 <link rel="stylesheet"
   media="none"
   onload="if(media!='all')media='all'"
   rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  href="files/github.min.css" />
+  <!-- href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" /> -->
 
 <style>
-  body{color:#2D2E33;}
+  body{color:#2D2E33;
+    font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.02em;
+    text-rendering: optimizeLegibility;
+  }
   div.raw{background-color:#DB5461;}
   div.optimized{background-color:#FFD166;}
   div.container{max-width:1200px;}
@@ -213,7 +227,7 @@
 
 <!-- END of HTML content -->
 <!-- BGN of JS   content -->
-<script src = "js/passivate.js"></script>
+
 <script src = "js/jquery.min.js" async ></script>
 <script src = "js/bootstrap.min.js" async ></script>
 <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" async ></script> -->
@@ -296,6 +310,7 @@
   document.addEventListener('keyup', go, false);
 </script>
 
+  <!-- src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> -->
 <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     MathJax.Hub.Queue(function(){BetterIt(MathInput.value);doregex(MathSandbox.value,RegExSandbox.value,SubsSandbox.value)});
@@ -314,5 +329,6 @@
   </div>
   </div>
 </div>
+<script src = "js/passivate.js"></script>
 </body>
 </html>
