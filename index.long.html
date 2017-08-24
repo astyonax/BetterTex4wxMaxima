@@ -247,14 +247,20 @@
     //   TeX = TeX.replace(new RegExp(re,'gm'),sb);
     // }
 
+    // interecepts {blabla}^-> blabla^ with a=one caracter
+    // -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
+    TeX = TeX.replace(/([^}ct]){([a-zA-Z0-9]*?)}\^/gm,"$1 $2^");
     // interecepts ^{a}-> ^a with a=one caracter
     TeX = TeX.replace(/\^{([a-zA-Z0-9])}/gm,"^$1");
     // intercepts {\a_command^a_char} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
-    TeX = TeX.replace(/([^}c]){(\\*[^{]*?\^[a-zA-Z0-9])}/gm,"$1 $2");
+    // intercepts {\a_command^{str}} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
+    TeX = TeX.replace(/([^}ct]){\s*(\\*[^{]*?\^{{0,1}[a-zA-Z0-9]*?}{0,1})\s*}/gm,"$1 $2");
     // intercepts {\left(..\right)} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
-    TeX = TeX.replace(/[^}c]{(\\left\(.+?\\right\))\s*}/gm,"$1");
+    TeX = TeX.replace(/[^}ct]{(\\left\(.+?\\right\))\s*}/gm,"$1");
     // intercepts {optional_command or words} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
-    TeX = TeX.replace(/[^}c]{(\\\\*\s*\w+?\s*)}/gm,"$1 ");
+    TeX = TeX.replace(/[^}ct]{(\\\\*\s*\w+?\s*)}/gm," $1 ");
+    // intercepts the newly created {\s case and removes \s
+    TeX = TeX.replace(/{ /gm,"{");
     return TeX;
   }
   window.BetterIt = function (TeX) {
