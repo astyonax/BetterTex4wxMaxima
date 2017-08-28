@@ -73,9 +73,9 @@
         <li><a href="#Simplify">Simplify</a></li>
         <li><a href="#Sandbox">Sandbox</a></li>
         <li><a href="#About">About</a></li>
+        <li><a href="https://github.com/astyonax/wxmaxima/tree/BetterTeX">BetterTeX <i class="fa fa-code-fork" aria-hidden="true"></i></a></li>
       </ul>
   </nav>
-
   <div class='container' id='Simplify' onclick="BetterIt(MathInput.value)">
     <div class='row raw'>
       <div class='col-md-6'>
@@ -83,11 +83,13 @@
         <div class=form-group>
         <textarea class="form-control" id="MathInput" aria-labelledby="lblMathInput" width=100% rows="8" >
 \begin{align}
-  \frac{\left( -8 \mathit{tU} U+4 b\, \mathit{ii}\, {{\mathit{tU}}^{2}}-2 \mathit{TnnT}\, \mathit{ii}\right)  \lambda}{2}&amp;\\
-  {\left( .. \right)}&amp;\\
-  {m^2}&amp;\\
-  \frac{\left( .. \right)}{m^2}&amp;
+  \frac{\left( -8 \mathit{tU} U+4 b\, \mathit{ii}\, {{\mathit{tU}}^{2}}-2 \mathit{TnnT}\, \mathit{ii}\right)  \lambda}{2}&\\
+  {\left( .. \right)}&\\
+  {m^2}&\\
+  \frac{\left( .. \right)}{m^2}&\\
+ \frac{{{x}^{x}}}{x}
 \end{align}
+
         </textarea>
         <button class='btn btn-primary' onclick="BetterIt(MathInput.value)">Show (CTRL+ENTER)</button>
         </div>
@@ -157,7 +159,17 @@
     <div class='row '>
       <div class='col-md-2'></div>
       <div class='col-md-8'>
+         <h2>News</h2>
+         <dl>
+             <dt>27 August 2017 </dt>
+             <dd> We are implementing these regex in `wxMaxima`. You can follow the work
+                 in the <a href="https://github.com/astyonax/wxmaxima/tree/BetterTeX">BetterTex branch</a> and in the <a href="https://github.com/andrejv/wxmaxima/pull/915">pull request</a>.
+            <dt> 20 August 2017</dt>
+            <dd> Advertising <a href="https://github.com/andrejv/wxmaxima/issues/912">as an issue</a>
+         </dl>
         <h2>About</h2>
+
+
         The \(\TeX\) output of <a href="http://andrejv.github.io/wxmaxima/">wxMaxima
           <i class="fa fa-external-link" aria-hidden="true"></i>
         </a> is not so readable.
@@ -239,7 +251,7 @@
     // cleans the tex. transformations order is not commutative
     var remove_list = ['\\\\ensuremath','\\\\mathit'];
     for (i=0;i<remove_list.length;i++){
-      TeX = TeX.replace(new RegExp('{{0,1}'+remove_list[i]+'{([a-zA-Z0-9]+?)}{1,2}','gm'),'$1');
+      TeX = TeX.replace(new RegExp(remove_list[i]+'{([a-zA-Z0-9]+?)}','gm'),'$1');
     }
     //
     // // Escaping is a mess but I would like to get this working asap
@@ -263,16 +275,16 @@
 
     // interecepts {blabla}^-> blabla^ with a=one caracter
     // -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
-    TeX = TeX.replace(/([^}ct]){([a-zA-Z0-9]*?)}\^/gm,"$1 $2^");
+    TeX = TeX.replace(/([^}ct]){([a-zA-Z0-9]*?)}\^/gm,"$1 $2^"); // no lookbehind in js
     // interecepts ^{a}-> ^a with a=one caracter
     TeX = TeX.replace(/\^{([a-zA-Z0-9])}/gm,"^$1");
     // intercepts {\a_command^a_char} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
     // intercepts {\a_command^{str}} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
     TeX = TeX.replace(/([^}ct]){\s*(\\*[^{]*?\^{{0,1}[a-zA-Z0-9]*?}{0,1})\s*}/gm,"$1 $2");
     // intercepts {\left(..\right)} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
-    TeX = TeX.replace(/[^}ct]{(\\left\(.+?\\right\))\s*}/gm,"$1");
+    TeX = TeX.replace(/([^}ct]){(\\left\(.+?\\right\))\s*}/gm,"$1 $2");
     // intercepts {optional_command or words} -- protected if begins with c{..} or }{} as would be in \frac{..}{..}
-    TeX = TeX.replace(/[^}ct]{(\\\\*\s*\w+?\s*)}/gm," $1 ");
+    TeX = TeX.replace(/([^}ct]){(\\\\*\s*\w+?\s*)}/gm," $1 $2");
     // intercepts the newly created {\s case and removes \s
     TeX = TeX.replace(/{ /gm,"{");
     return TeX;
